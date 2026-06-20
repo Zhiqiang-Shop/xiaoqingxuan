@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xiaoqingxuan · Creative Craftsmanship</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..700&family=Playfair+Display:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet" />
+    <style>
+        /* ============================================================
+                   RESET & BASE
+                   ============================================================ */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #5D4037;
+            --color-primary-light: #8D6E63;
+            --color-accent: #C9A84C;
+            --color-accent-light: #E8D5A3;
+            --color-bg: #FDF8F3;
+            --color-bg-card: #FFFFFF;
+            --color-text: #2D2D2D;
+            --color-text-light: #6B6B6B;
+            --color-border: #E8E0D8;
+            --color-shadow: rgba(93, 64, 55, 0.10);
+            --radius: 12px;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            --max-width: 1200px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        ul {
+            list-style: none;
+        }
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ============================================================
+                   BUTTONS
+                   ============================================================ */
+        .btn {
+            display: inline-block;
+            padding: 14px 36px;
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
+        .btn-primary {
+            background-color: var(--color-accent);
+            color: #fff;
+        }
+        .btn-primary:hover {
+            background-color: #B8953A;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(201, 168, 76, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: #fff;
+            transform: translateY(-2px);
+        }
+        .btn-dark {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+        .btn-dark:hover {
+            background-color: #3E2C24;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(93, 64, 55, 0.30);
+        }
+
+        .btn-sm {
+            padding: 10px 24px;
+            font-size: 0.85rem;
+        }
+
+        /* ============================================================
+                   NAVIGATION
+                   ============================================================ */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(253, 248, 243, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(232, 224, 216, 0.4);
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            background: rgba(253, 248, 243, 0.96);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: -0.5px;
+        }
+        .logo span {
+            color: var(--color-accent);
+        }
+        .logo small {
+            font-family: var(--font-sans);
+            font-size: 0.6rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+            letter-spacing: 0.5px;
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--color-text);
+            transition: var(--transition);
+            position: relative;
+            letter-spacing: 0.2px;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            color: var(--color-primary);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--color-accent);
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .nav-cta:hover {
+            background: #B8953A;
+            transform: translateY(-1px);
+        }
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2.5px;
+            background: var(--color-primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ============================================================
+                   HERO
+                   ============================================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 24px 80px;
+            background: linear-gradient(145deg, #FDF8F3 0%, #F5EDE4 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 60%;
+            height: 80%;
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 50%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(93, 64, 55, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 820px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.15);
+            color: var(--color-accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 20px;
+            border-radius: 50px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: 4.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+        .hero h1 span {
+            color: var(--color-accent);
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--color-text-light);
+            max-width: 560px;
+            margin: 0 auto 36px;
+            line-height: 1.7;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-buttons .btn {
+            min-width: 160px;
+        }
+
+        /* ============================================================
+                   SECTION COMMON
+                   ============================================================ */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: var(--color-text-light);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+        }
+        .section-divider {
+            width: 60px;
+            height: 3px;
+            background: var(--color-accent);
+            margin: 0 auto 16px;
+            border-radius: 4px;
+        }
+
+        /* ============================================================
+                   PRODUCTS
+                   ============================================================ */
+        .products {
+            background: #fff;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 28px;
+        }
+        .product-card {
+            background: var(--color-bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 4px 16px var(--color-shadow);
+            transition: var(--transition);
+            border: 1px solid var(--color-border);
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 40px rgba(93, 64, 55, 0.12);
+        }
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #F5F0EB;
+            overflow: hidden;
+            position: relative;
+        }
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .product-card:hover .product-image img {
+            transform: scale(1.04);
+        }
+        .product-image .badge {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 50px;
+        }
+        .product-info {
+            padding: 18px 20px 22px;
+        }
+        .product-info .name {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 4px;
+        }
+        .product-info .material {
+            font-size: 0.8rem;
+            color: var(--color-text-light);
+            margin-bottom: 6px;
+            letter-spacing: 0.3px;
+        }
+        .product-info .material span {
+            display: inline-block;
+            background: var(--color-bg);
+            padding: 2px 12px;
+            border-radius: 50px;
+            border: 1px solid var(--color-border);
+            font-size: 0.7rem;
+        }
+        .product-info .price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin: 8px 0 14px;
+        }
+        .product-info .price small {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: var(--color-text-light);
+            margin-left: 4px;
+        }
+        .product-info .btn {
+            width: 100%;
+            justify-content: center;
+            font-size: 0.85rem;
+            padding: 12px;
+        }
+
+        /* ============================================================
+                   ABOUT
+                   ============================================================ */
+        .about {
+            background: var(--color-bg);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .about-text h3 {
+            font-family: var(--font-serif);
+            font-size: 1.8rem;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+        }
+        .about-text p {
+            color: var(--color-text-light);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+        .about-text .highlight {
+            color: var(--color-accent);
+            font-weight: 600;
+        }
+        .about-image {
+            background: #F5EDE4;
+            border-radius: var(--radius);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--color-primary-light);
+            border: 2px dashed var(--color-border);
+            padding: 40px;
+            text-align: center;
+            line-height: 1.8;
+        }
+        .about-image strong {
+            color: var(--color-primary);
+            display: block;
+            font-size: 1.6rem;
+        }
+
+        /* ============================================================
+                   WHOLESALE
+                   ============================================================ */
+        .wholesale {
+            background: var(--color-primary);
+            color: #fff;
+        }
+        .wholesale .section-title {
+            color: #fff;
+        }
+        .wholesale .section-subtitle {
+            color: rgba(255, 255, 255, 0.75);
+        }
+        .wholesale .section-divider {
+            background: var(--color-accent);
+        }
+        .wholesale-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 12px;
+        }
+        .wholesale-item {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .wholesale-item:hover {
+            background: rgba(255, 255, 255, 0.10);
+            transform: translateY(-4px);
+        }
+        .wholesale-item .icon {
+            font-size: 2.4rem;
+            margin-bottom: 12px;
+        }
+        .wholesale-item h4 {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        .wholesale-item p {
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .wholesale-cta {
+            text-align: center;
+            margin-top: 44px;
+        }
+        .wholesale-cta .btn {
+            background: var(--color-accent);
+            color: #fff;
+            font-size: 1rem;
+            padding: 16px 48px;
+        }
+        .wholesale-cta .btn:hover {
+            background: #B8953A;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(201, 168, 76, 0.35);
+        }
+        .wholesale-cta p {
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* ============================================================
+                   POLICIES (accordion)
+                   ============================================================ */
+        .policies {
+            background: #fff;
+        }
+        .policies .section-title {
+            color: var(--color-primary);
+        }
+        .accordion {
+            max-width: 840px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .accordion-item {
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--color-bg-card);
+            transition: var(--transition);
+        }
+        .accordion-item:hover {
+            border-color: #D5C8BC;
+        }
+        .accordion-header {
+            width: 100%;
+            padding: 20px 28px;
+            background: none;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            transition: var(--transition);
+            text-align: left;
+            gap: 16px;
+        }
+        .accordion-header:hover {
+            background: rgba(93, 64, 55, 0.03);
+        }
+        .accordion-header .arrow {
+            font-size: 1.2rem;
+            transition: var(--transition);
+            flex-shrink: 0;
+            color: var(--color-accent);
+        }
+        .accordion-item.open .accordion-header .arrow {
+            transform: rotate(180deg);
+        }
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+            padding: 0 28px;
+            color: var(--color-text-light);
+            line-height: 1.8;
+        }
+        .accordion-item.open .accordion-body {
+            max-height: 800px;
+            padding: 0 28px 28px;
+        }
+        .accordion-body p {
+            margin-bottom: 12px;
+        }
+        .accordion-body p:last-child {
+            margin-bottom: 0;
+        }
+        .accordion-body strong {
+            color: var(--color-text);
+        }
+        .accordion-body ul {
+            padding-left: 20px;
+            margin: 8px 0 16px;
+        }
+        .accordion-body ul li {
+            list-style: disc;
+            margin-bottom: 4px;
+        }
+
+        /* ============================================================
+                   CONTACT
+                   ============================================================ */
+        .contact {
+            background: var(--color-bg);
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 12px;
+        }
+        .contact-info h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            margin-bottom: 16px;
+        }
+        .contact-info p {
+            color: var(--color-text-light);
+            line-height: 1.9;
+            margin-bottom: 12px;
+        }
+        .contact-info .detail {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .contact-info .detail .icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .contact-info .detail .label {
+            font-weight: 600;
+            color: var(--color-text);
+            display: block;
+            font-size: 0.9rem;
+        }
+        .contact-info .detail .value {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+        .contact-map {
+            background: #F5EDE4;
+            border-radius: var(--radius);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-primary-light);
+            font-size: 0.95rem;
+            border: 2px dashed var(--color-border);
+            text-align: center;
+            padding: 24px;
+            line-height: 1.8;
+        }
+        .contact-map strong {
+            color: var(--color-primary);
+            display: block;
+            font-size: 1.2rem;
+        }
+
+        /* ============================================================
+                   FOOTER
+                   ============================================================ */
+        .footer {
+            background: #1E1A18;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 48px 0 28px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 32px;
+        }
+        .footer-brand .logo {
+            color: #fff;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+        .footer-brand .logo span {
+            color: var(--color-accent);
+        }
+        .footer-brand p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            max-width: 300px;
+        }
+        .footer-col h4 {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 14px;
+            letter-spacing: 0.3px;
+        }
+        .footer-col a {
+            display: block;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            transition: var(--transition);
+            margin-bottom: 8px;
+        }
+        .footer-col a:hover {
+            color: var(--color-accent);
+        }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.85rem;
+        }
+        .footer-bottom .legal {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-bottom .legal a {
+            color: rgba(255, 255, 255, 0.5);
+            transition: var(--transition);
+        }
+        .footer-bottom .legal a:hover {
+            color: var(--color-accent);
+        }
+
+        /* ============================================================
+                   RESPONSIVE
+                   ============================================================ */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .wholesale-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 820px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--color-bg-card);
+                flex-direction: column;
+                padding: 80px 32px 32px;
+                box-shadow: -8px 0 32px rgba(0, 0, 0, 0.08);
+                transition: var(--transition);
+                gap: 20px;
+                align-items: flex-start;
+                border-left: 1px solid var(--color-border);
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .hamburger {
+                display: flex;
+                z-index: 1001;
+            }
+            .hamburger.open span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.open span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.open span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+            .nav-cta {
+                display: inline-block;
+            }
+            .hero-buttons .btn {
+                min-width: 140px;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .products-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .product-info {
+                padding: 14px 16px 18px;
+            }
+            .product-info .name {
+                font-size: 0.95rem;
+            }
+            .product-info .price {
+                font-size: 1.1rem;
+            }
+            .wholesale-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .accordion-header {
+                font-size: 0.95rem;
+                padding: 16px 20px;
+            }
+            .accordion-body {
+                padding: 0 20px;
+                font-size: 0.9rem;
+            }
+            .accordion-item.open .accordion-body {
+                padding: 0 20px 20px;
+            }
+            section {
+                padding: 56px 0;
+            }
+            .container {
+                padding: 0 16px;
+            }
+            .navbar {
+                padding: 12px 0;
+            }
+            .logo {
+                font-size: 1.3rem;
+            }
+            .hero {
+                padding: 100px 16px 60px;
+                min-height: 90vh;
+            }
+            .contact-info .detail {
+                flex-wrap: wrap;
+            }
+            .btn {
+                padding: 12px 28px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 260px;
+            }
+        }
+
+        /* ============================================================
+                   UTILITY
+                   ============================================================ */
+        .text-accent {
+            color: var(--color-accent);
+        }
+        .text-center {
+            text-align: center;
+        }
+        .mt-8 {
+            margin-top: 8px;
+        }
+        .mb-8 {
+            margin-bottom: 8px;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    NAVIGATION
+    ============================================================ -->
+    <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <a href="#" class="logo" aria-label="Xiaoqingxuan Home">
+                Xiaoqingxuan<span>.</span>
+                <small>Creative Craftsmanship</small>
+            </a>
+
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="none"><a href="#products" role="menuitem">Products</a></li>
+                <li role="none"><a href="#about" role="menuitem">About</a></li>
+                <li role="none"><a href="#wholesale" role="menuitem">Wholesale</a></li>
+                <li role="none"><a href="#policies" role="menuitem">Policies</a></li>
+                <li role="none"><a href="#contact" role="menuitem">Contact</a></li>
+                <li role="none"><a href="#products" class="nav-cta" role="menuitem">Shop Now</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    HERO
+    ============================================================ -->
+    <header class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-badge">✦ Artisan Collection</div>
+            <h1>Creative Craftsmanship <br /><span>for Your Space</span></h1>
+            <p>
+                Exquisite resin, ceramic, crystal, and metal desktop sculptures —
+                crafted to inspire. Available for retail &amp; wholesale worldwide.
+            </p>
+            <div class="hero-buttons">
+                <a href="#products" class="btn btn-primary">Explore Collection</a>
+                <a href="#wholesale" class="btn btn-outline">Wholesale Inquiry</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ============================================================
+    PRODUCTS
+    ============================================================ -->
+    <section class="products" id="products">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title">Featured Creations</h2>
+            <p class="section-subtitle">
+                Each piece is a unique blend of artistry and craftsmanship —
+                perfect for desks, shelves, and curated interiors.
+            </p>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%201.jpg" alt="Eternal Wings resin sculpture" loading="lazy" />
+                        <span class="badge">Best Seller</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Eternal Wings</div>
+                        <div class="material"><span>Resin</span></div>
+                        <div class="price">$39.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%202.jpg" alt="Quiet Hours ceramic vase" loading="lazy" />
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Quiet Hours</div>
+                        <div class="material"><span>Ceramic</span></div>
+                        <div class="price">$49.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%203.jpg" alt="Starlight crystal sphere" loading="lazy" />
+                        <span class="badge">New</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Starlight Sphere</div>
+                        <div class="material"><span>Crystal</span></div>
+                        <div class="price">$59.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%204.jpg" alt="Industrial Era metal sculpture" loading="lazy" />
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Industrial Era</div>
+                        <div class="material"><span>Metal</span></div>
+                        <div class="price">$69.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%205.jpg" alt="Nature's Song resin tree sculpture" loading="lazy" />
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Nature's Song</div>
+                        <div class="material"><span>Resin</span></div>
+                        <div class="price">$44.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%206.jpg" alt="Classic Charm ceramic tea set" loading="lazy" />
+                        <span class="badge">Limited</span>
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Classic Charm</div>
+                        <div class="material"><span>Ceramic</span></div>
+                        <div class="price">$54.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%207.jpg" alt="Dreamscape crystal sculpture" loading="lazy" />
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Dreamscape</div>
+                        <div class="material"><span>Crystal</span></div>
+                        <div class="price">$64.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="images/Product%20photo%208.jpg" alt="Minimalist metal geometric" loading="lazy" />
+                    </div>
+                    <div class="product-info">
+                        <div class="name">Minimalist Geometry</div>
+                        <div class="material"><span>Metal</span></div>
+                        <div class="price">$74.99 <small>USD</small></div>
+                        <button class="btn btn-dark btn-sm">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ABOUT
+    ============================================================ -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-text">
+                    <div class="section-divider" style="margin:0 0 12px 0;"></div>
+                    <h3>Where Art Meets Craft</h3>
+                    <p>
+                        <strong>Shanghai Xiaoqingxuan Trading Co., Ltd</strong> brings together
+                        traditional craftsmanship and contemporary design. We specialize in
+                        <span class="highlight">resin, ceramic, crystal, and metal</span>
+                        desktop sculptures that elevate any space — from home offices to
+                        executive suites.
+                    </p>
+                    <p>
+                        Every piece is thoughtfully designed and meticulously finished by
+                        skilled artisans. Whether you are looking for a single accent piece
+                        or a curated collection for your store, we deliver quality that
+                        speaks for itself.
+                    </p>
+                    <p style="margin-top:8px;">
+                        <strong>✦</strong> Retail &amp; Wholesale · <strong>✦</strong> Global Shipping
+                        · <strong>✦</strong> 7–9 Day Delivery
+                    </p>
+                </div>
+                <div class="about-image">
+                    <div>
+                        <strong>Shanghai Xiaoqingxuan</strong>
+                        <span style="display:block;margin-top:8px;font-size:1rem;color:var(--color-text-light);">
+                            Craftsmanship · Integrity · Creativity
+                        </span>
+                        <span style="display:block;margin-top:12px;font-size:0.85rem;color:var(--color-text-light);">
+                            Since 2019
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    WHOLESALE
+    ============================================================ -->
+    <section class="wholesale" id="wholesale">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title">Wholesale Partnerships</h2>
+            <p class="section-subtitle">
+                Stock premium artisan pieces for your store or brand. No minimum order quantity — buy one or a hundred, we ship worldwide.
+            </p>
+
+            <div class="wholesale-grid">
+                <div class="wholesale-item">
+                    <div class="icon">🛒</div>
+                    <h4>No MOQ</h4>
+                    <p>
+                        Order as little as <strong>one piece</strong> or build a full collection. We serve both retail and wholesale customers.
+                    </p>
+                </div>
+                <div class="wholesale-item">
+                    <div class="icon">✈️</div>
+                    <h4>Global Express</h4>
+                    <p>
+                        Air freight with <strong>end‑to‑end tracking</strong>.
+                        Delivery in <strong>7–9 working days</strong> worldwide.
+                    </p>
+                </div>
+                <div class="wholesale-item">
+                    <div class="icon">🏷️</div>
+                    <h4>Volume Discounts</h4>
+                    <p>
+                        Tiered pricing from <strong>5%</strong> to <strong>20%</strong>
+                        off retail. Custom branding available on request.
+                    </p>
+                </div>
+            </div>
+
+            <div class="wholesale-cta">
+                <a href="mailto:xiaoqingxuan1@sina.com" class="btn">Inquire About Wholesale</a>
+                <p>Email us with your requirements — we respond within 24 hours.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    POLICIES (Accordion)
+    ============================================================ -->
+    <section class="policies" id="policies">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title">Our Policies</h2>
+            <p class="section-subtitle">
+                We believe in transparency and trust. Here is everything you need
+                to know about shipping, returns, privacy, and payments.
+            </p>
+
+            <div class="accordion" id="accordion">
+
+                <!-- Shipping -->
+                <div class="accordion-item open">
+                    <button class="accordion-header" aria-expanded="true">
+                        <span>✈️ Shipping &amp; Delivery</span>
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p><strong>Shipping Method:</strong> All orders are dispatched via premium air freight with <strong>end‑to‑end tracking</strong>. You will receive a tracking number as soon as your order ships.</p>
+                        <p><strong>Delivery Time:</strong> From our warehouse in Shanghai, China, to your doorstep in <strong>7–9 working days</strong> (excluding customs clearance).</p>
+                        <p><strong>Shipping Cost:</strong> Calculated at checkout based on destination and order weight. Free shipping on wholesale orders over $500 USD.</p>
+                        <p><strong>Customs &amp; Duties:</strong> International orders may be subject to import duties and taxes, which are the responsibility of the recipient.</p>
+                        <p><strong>Order Processing:</strong> Orders are processed within 1–2 business days. You will receive a confirmation email once your order is packed and ready for dispatch.</p>
+                    </div>
+                </div>
+
+                <!-- Returns -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>🔄 Returns &amp; Refunds</span>
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p><strong>30‑Day Satisfaction Guarantee:</strong> If you are not completely satisfied with your purchase, you may return it within <strong>30 days</strong> of receiving your order.</p>
+                        <p><strong>Return Conditions:</strong> Items must be unused, in original packaging, and in the same condition as received. Returns that are damaged or show signs of use may be rejected.</p>
+                        <p><strong>Refund Process:</strong> Once we receive and inspect your return, we will issue a refund to your original payment method within 5–7 business days. Shipping costs are non‑refundable.</p>
+                        <p><strong>Return Shipping:</strong> Customers are responsible for return shipping costs unless the item arrived damaged or defective. We recommend using a tracked shipping service.</p>
+                        <p>To initiate a return, please contact us at <strong>xiaoqingxuan1@sina.com</strong> with your order number and reason for return.</p>
+                    </div>
+                </div>
+
+                <!-- Privacy -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>🔒 Privacy Policy</span>
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p><strong>Information We Collect:</strong> We collect information you provide directly, such as your name, email address, shipping address, and payment details when you place an order or contact us.</p>
+                        <p><strong>How We Use It:</strong> We use your information to process orders, communicate with you about your purchase, and improve our products and services. We do <strong>not</strong> sell or share your personal data with third parties for marketing purposes.</p>
+                        <p><strong>Data Security:</strong> We implement industry‑standard security measures to protect your information. All payment transactions are encrypted via secure payment gateways.</p>
+                        <p><strong>Cookies:</strong> We use cookies to enhance your browsing experience and analyze site traffic. You can adjust your cookie preferences in your browser settings.</p>
+                        <p><strong>Your Rights:</strong> You have the right to access, correct, or delete your personal data at any time. Contact us at <strong>xiaoqingxuan1@sina.com</strong> for any privacy‑related requests.</p>
+                    </div>
+                </div>
+
+                <!-- Payment -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>💳 Payment Methods</span>
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p><strong>Accepted Payment Methods:</strong> We accept all major credit and debit cards (Visa, MasterCard, American Express, Discover), as well as PayPal and bank transfers for wholesale orders.</p>
+                        <p><strong>Currency:</strong> All prices are listed in <strong>USD (United States Dollars)</strong>. Your bank may charge a foreign transaction fee — please check with your financial institution.</p>
+                        <p><strong>Payment Security:</strong> All transactions are processed through secure, PCI‑compliant payment gateways. We never store your full payment information on our servers.</p>
+                        <p><strong>Billing Address:</strong> Please ensure that your billing address matches the one on file with your payment method to avoid processing delays.</p>
+                    </div>
+                </div>
+
+                <!-- Wholesale Policy -->
+                <div class="accordion-item">
+                    <button class="accordion-header" aria-expanded="false">
+                        <span>📋 Wholesale Policy</span>
+                        <span class="arrow">▾</span>
+                    </button>
+                    <div class="accordion-body">
+                        <p><strong>Minimum Order Quantity:</strong> <strong>No minimum</strong> — you can order a single piece or bulk. We welcome orders of all sizes.</p>
+                        <p><strong>Discount Tiers (automatic):</strong></p>
+                        <ul>
+                            <li>1–9 units: <strong>retail price</strong></li>
+                            <li>10–49 units: <strong>5%</strong> off retail</li>
+                            <li>50–99 units: <strong>10%</strong> off retail</li>
+                            <li>100+ units: <strong>20%</strong> off retail</li>
+                        </ul>
+                        <p><strong>Custom Branding:</strong> For orders of 100+ units, we offer custom packaging and branding options. Please contact us with your requirements.</p>
+                        <p><strong>Lead Time:</strong> Wholesale orders are typically processed within 3–5 business days, depending on order volume and customization.</p>
+                        <p><strong>Payment Terms:</strong> 50% deposit is required for custom orders; balance due before shipment. Standard wholesale orders require full payment at checkout.</p>
+                        <p>For wholesale inquiries, email us at <strong>xiaoqingxuan1@sina.com</strong> with your desired products and quantities.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    CONTACT
+    ============================================================ -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-divider"></div>
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">
+                We would love to hear from you — whether you are placing an order,
+                exploring wholesale, or simply have a question.
+            </p>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Shanghai Xiaoqingxuan Trading Co., Ltd</h3>
+                    <p>
+                        We are a trusted supplier of premium artisan desk sculptures,
+                        serving customers and retailers across the United States and
+                        beyond.
+                    </p>
+
+                    <div class="detail">
+                        <span class="icon">📍</span>
+                        <div>
+                            <span class="label">Office &amp; Warehouse</span>
+                            <span class="value">
+                                Unit J, 1st Floor, Building 1,<br />
+                                1185 Huyi Road, Jiading District,<br />
+                                Shanghai, China
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <span class="icon">✉️</span>
+                        <div>
+                            <span class="label">Email</span>
+                            <span class="value">
+                                <a href="mailto:xiaoqingxuan1@sina.com" style="color:var(--color-accent);font-weight:500;">
+                                    xiaoqingxuan1@sina.com
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="detail">
+                        <span class="icon">🌐</span>
+                        <div>
+                            <span class="label">Website</span>
+                            <span class="value">xiaoqingxuan.shop</span>
+                        </div>
+                    </div>
+
+                    <div class="detail" style="margin-top:20px;padding-top:20px;border-top:1px solid var(--color-border);">
+                        <span class="icon">🕒</span>
+                        <div>
+                            <span class="label">Business Hours</span>
+                            <span class="value">
+                                Monday – Friday: 9:00 AM – 6:00 PM (Shanghai Time)<br />
+                                <span style="font-size:0.85rem;color:var(--color-text-light);">
+                                    We respond to all inquiries within 24 hours.
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-map">
+                    <div>
+                        <strong>📍 Our Location</strong>
+                        <span style="display:block;margin-top:8px;font-size:0.95rem;color:var(--color-text-light);">
+                            1185 Huyi Road, Jiading District<br />
+                            Shanghai, China
+                        </span>
+                        <span style="display:block;margin-top:12px;font-size:0.8rem;color:var(--color-text-light);">
+                            <span style="display:inline-block;background:var(--color-accent);color:#fff;padding:2px 12px;border-radius:50px;font-weight:600;">
+                                Map
+                            </span>
+                            &nbsp; (Interactive map placeholder)
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo">
+                        Xiaoqingxuan<span>.</span>
+                    </div>
+                    <p style="margin-top:6px;">
+                        Creative craftsmanship for inspired spaces. Resin, ceramic,
+                        crystal, and metal sculptures for retail and wholesale.
+                    </p>
+                    <p style="margin-top:12px;font-size:0.85rem;color:rgba(255,255,255,0.4);">
+                        © 2026 Shanghai Xiaoqingxuan Trading Co., Ltd
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Shop</h4>
+                    <a href="#products">All Products</a>
+                    <a href="#products">Resin</a>
+                    <a href="#products">Ceramic</a>
+                    <a href="#products">Crystal</a>
+                    <a href="#products">Metal</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Information</h4>
+                    <a href="#about">About Us</a>
+                    <a href="#wholesale">Wholesale</a>
+                    <a href="#policies">Shipping Policy</a>
+                    <a href="#policies">Returns</a>
+                    <a href="#policies">Privacy Policy</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <a href="mailto:xiaoqingxuan1@sina.com">Email Us</a>
+                    <a href="#contact">Visit Us</a>
+                    <a href="#wholesale">Wholesale Inquiry</a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>
+                    Shanghai Xiaoqingxuan Trading Co., Ltd &nbsp;·&nbsp; All rights reserved.
+                </span>
+                <div class="legal">
+                    <a href="#policies">Privacy Policy</a>
+                    <a href="#policies">Terms of Service</a>
+                    <a href="#policies">Returns Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- Hamburger toggle -----
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+
+            if (hamburger && navLinks) {
+                hamburger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = navLinks.classList.toggle('open');
+                    hamburger.classList.toggle('open');
+                    hamburger.setAttribute('aria-expanded', isOpen);
+                });
+
+                navLinks.querySelectorAll('a').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('open');
+                        hamburger.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (navLinks.classList.contains('open') &&
+                        !navLinks.contains(e.target) &&
+                        !hamburger.contains(e.target)) {
+                        navLinks.classList.remove('open');
+                        hamburger.classList.remove('open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+
+            // ----- Navbar scroll effect -----
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', function() {
+                const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll > 60) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // ----- Accordion -----
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(function(item) {
+                const header = item.querySelector('.accordion-header');
+                if (!header) return;
+
+                header.addEventListener('click', function() {
+                    const isOpen = item.classList.contains('open');
+
+                    accordionItems.forEach(function(sibling) {
+                        if (sibling !== item && sibling.classList.contains('open')) {
+                            sibling.classList.remove('open');
+                            const btn = sibling.querySelector('.accordion-header');
+                            if (btn) btn.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+
+                    if (isOpen) {
+                        item.classList.remove('open');
+                        header.setAttribute('aria-expanded', 'false');
+                    } else {
+                        item.classList.add('open');
+                        header.setAttribute('aria-expanded', 'true');
+                    }
+                });
+            });
+
+            // ----- Smooth anchor scroll -----
+            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+                anchor.addEventListener('click', function(e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetEl = document.querySelector(targetId);
+                    if (targetEl) {
+                        e.preventDefault();
+                        const navHeight = navbar.offsetHeight || 80;
+                        const top = targetEl.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // ----- Product "Add to Cart" demo -----
+            document.querySelectorAll('.product-card .btn-dark').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const card = this.closest('.product-card');
+                    const name = card ? card.querySelector('.name')?.textContent || 'Item' : 'Item';
+                    const originalText = this.textContent;
+                    this.textContent = '✓ Added!';
+                    this.style.backgroundColor = '#2E7D32';
+                    setTimeout(function() {
+                        this.textContent = originalText;
+                        this.style.backgroundColor = '';
+                    }.bind(this), 1600);
+                });
+            });
+
+            // ----- Hero CTA "Shop Now" -----
+            const shopNowBtns = document.querySelectorAll('.hero-buttons .btn-primary, .nav-cta');
+            shopNowBtns.forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    const target = document.querySelector('#products');
+                    if (target) {
+                        e.preventDefault();
+                        const navHeight = navbar.offsetHeight || 80;
+                        const top = target.getBoundingClientRect().top + window.pageYOffset - navHeight - 16;
+                        window.scrollTo({ top: top, behavior: 'smooth' });
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
